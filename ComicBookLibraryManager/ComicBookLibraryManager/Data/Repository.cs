@@ -178,3 +178,17 @@ namespace ComicBookLibraryManager.Data
         }
     }
 }
+
+/* Notes
+ * To delete an entity, it must be tracked by the context before calling the DbSet Remove method. -- If we want to avoid having to retrieve the entity from the database, we can create a simple stub entity and attach it to the context.
+ * Defining foreign key properties gives you the ability to associate a related principal entity by just setting a foreign key property value on the dependent entity.
+ * To successfully delete an entity, every property on the entity does not need to have a value. The only property that needs a value is the entity's key property, which is used to identify the database table row to delete.
+ * Entities that are not being tracked by the context are said to be disconnected or detached.
+ * When calling the context's Entry method, if the passed in entity is not in the context, EF will attach it and set its state to "Unchanged". --This allows you to attach and set an entity's state in a single line of code
+ * Adding an entity to the context by calling the DbSet Add() method will set the entity's state to "Added". Not only will the entity's state be set to "Added", but each of the entity's related or child entity states will also be set to "Added".
+ * Each entity in the context that has a state of "Added" will be inserted into the database when the context's SaveChanges() method is called. --Changing an entry's state from "Added" to "Unchanged" before calling the SaveChanges method will prevent the entity from being inserted into the database.
+ * EF can be forced to treat an entity's values as "new" values by setting the associated entry's state to "Modified". --When calling the SaveChanges method, EF will persist each of the "Modified" entity's property values to the database.
+ * After attaching a disconnected entity to the context using the Attach method, its state will be set to "Unchanged". --The entity's state is set to "Unchanged" as EF is unable to detect whether or not any of the entity's property values are different from the values that are currently in the database.
+ * When deleting an entity, EF will—by default—cascade delete any dependent entities whose foreign key properties are not nullable. --If the foreign key property is nullable, then EF will set the property value to null when the principal entity is deleted.
+ *
+     */
