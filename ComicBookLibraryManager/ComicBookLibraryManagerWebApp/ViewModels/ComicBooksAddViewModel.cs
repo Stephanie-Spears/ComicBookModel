@@ -17,6 +17,7 @@ namespace ComicBookLibraryManagerWebApp.ViewModels
     {
         [Display(Name = "Artist")]
         public int ArtistId { get; set; }
+
         [Display(Name = "Role")]
         public int RoleId { get; set; }
 
@@ -38,7 +39,7 @@ namespace ComicBookLibraryManagerWebApp.ViewModels
             base.Init();
 
             ArtistSelectListItems = new SelectList(
-                new List<Artist>(), // TODO Get the artitsts list.
+                new List<Artist>(), // TODO Get the artists list.
                 "Id", "Name");
             RoleSelectListItems = new SelectList(
                 new List<Role>(), // TODO Get the roles list.
@@ -46,3 +47,9 @@ namespace ComicBookLibraryManagerWebApp.ViewModels
         }
     }
 }
+
+/*
+ A view model class gives you a way to bundle up everything that the view needs in order to render its content.
+
+Not using a view model class means that you'll likely need to rely upon ViewBag or ViewData for passing additional data (beyond the model's data) to the view.
+*/
