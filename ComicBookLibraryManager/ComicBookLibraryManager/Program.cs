@@ -1,29 +1,30 @@
-﻿using ComicBookLibraryManager.Data;
+﻿using ComicBookShared.Data;
 using ComicBookLibraryManager.Helpers;
-using ComicBookLibraryManager.Models;
+using ComicBookShared.Models;
 using System;
 using System.Collections.Generic;
 
 namespace ComicBookLibraryManager
 {
-    class Program
+    internal class Program
     {
-        // These are the various commands that can be performed 
+        // These are the various commands that can be performed
         // in the app. Each command must have a unique string value.
-        const string CommandListComicBooks = "l";
-        const string CommandListComicBook = "i";
-        const string CommandListComicBookProperties = "p";
-        const string CommandAddComicBook = "a";
-        const string CommandUpdateComicBook = "u";
-        const string CommandDeleteComicBook = "d";
-        const string CommandSave = "s";
-        const string CommandCancel = "c";
-        const string CommandQuit = "q";
+        private const string CommandListComicBooks = "l";
+
+        private const string CommandListComicBook = "i";
+        private const string CommandListComicBookProperties = "p";
+        private const string CommandAddComicBook = "a";
+        private const string CommandUpdateComicBook = "u";
+        private const string CommandDeleteComicBook = "d";
+        private const string CommandSave = "s";
+        private const string CommandCancel = "c";
+        private const string CommandQuit = "q";
 
         // A collection of the comic book editable properties.
-        // This collection of property names needs to match the list 
+        // This collection of property names needs to match the list
         // of the properties listed on the Comic Book Detail screen.
-        readonly static List<string> EditableProperties = new List<string>()
+        private static readonly List<string> EditableProperties = new List<string>()
         {
             "SeriesId",
             "IssueNumber",
@@ -32,12 +33,12 @@ namespace ComicBookLibraryManager
             "AverageRating"
         };
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             string command = CommandListComicBooks;
             IList<int> comicBookIds = null;
 
-            // If the current command doesn't equal the "Quit" command 
+            // If the current command doesn't equal the "Quit" command
             // then evaluate and process the command.
             while (command != CommandQuit)
             {
@@ -46,6 +47,7 @@ namespace ComicBookLibraryManager
                     case CommandListComicBooks:
                         comicBookIds = ListComicBooks();
                         break;
+
                     case CommandAddComicBook:
                         AddComicBook();
                         command = CommandListComicBooks;
@@ -92,7 +94,7 @@ namespace ComicBookLibraryManager
             var successful = false;
             int? comicBookId = null;
 
-            // Only attempt to parse the command to a line number 
+            // Only attempt to parse the command to a line number
             // if we have a collection of comic book IDs available.
             if (comicBookIds != null)
             {
@@ -118,7 +120,7 @@ namespace ComicBookLibraryManager
         }
 
         /// <summary>
-        /// Prompts the user for the comic book values to add 
+        /// Prompts the user for the comic book values to add
         /// and adds the comic book to the database.
         /// </summary>
         private static void AddComicBook()
@@ -153,7 +155,7 @@ namespace ComicBookLibraryManager
             int? seriesId = null;
             IList<Series> series = Repository.GetSeries();
 
-            // While the series ID is null, prompt the user to select a series ID 
+            // While the series ID is null, prompt the user to select a series ID
             // from the provided list.
             while (seriesId == null)
             {
@@ -178,7 +180,7 @@ namespace ComicBookLibraryManager
                     }
                 }
 
-                // If we weren't able to parse the provided line number 
+                // If we weren't able to parse the provided line number
                 // to a series ID then display an error message.
                 if (seriesId == null)
                 {
@@ -198,7 +200,7 @@ namespace ComicBookLibraryManager
             int? artistId = null;
             IList<Artist> artists = Repository.GetArtists();
 
-            // While the artist ID is null, prompt the user to select a artist ID 
+            // While the artist ID is null, prompt the user to select a artist ID
             // from the provided list.
             while (artistId == null)
             {
@@ -223,7 +225,7 @@ namespace ComicBookLibraryManager
                     }
                 }
 
-                // If we weren't able to parse the provided line number 
+                // If we weren't able to parse the provided line number
                 // to an artist ID then display an error message.
                 if (artistId == null)
                 {
@@ -243,7 +245,7 @@ namespace ComicBookLibraryManager
             int? roleId = null;
             IList<Role> roles = Repository.GetRoles();
 
-            // While the role ID is null, prompt the user to select a role ID 
+            // While the role ID is null, prompt the user to select a role ID
             // from the provided list.
             while (roleId == null)
             {
@@ -268,7 +270,7 @@ namespace ComicBookLibraryManager
                     }
                 }
 
-                // If we weren't able to parse the provided line number 
+                // If we weren't able to parse the provided line number
                 // to an role ID then display an error message.
                 if (roleId == null)
                 {
@@ -287,7 +289,7 @@ namespace ComicBookLibraryManager
         {
             int issueNumber = 0;
 
-            // While the issue number is less than or equal to "0", 
+            // While the issue number is less than or equal to "0",
             // prompt the user to provide an issue number.
             while (issueNumber <= 0)
             {
@@ -298,7 +300,7 @@ namespace ComicBookLibraryManager
                 // Attempt to parse the user's input to an integer.
                 int.TryParse(issueNumberInput, out issueNumber);
 
-                // If we weren't able to parse the provided issue number 
+                // If we weren't able to parse the provided issue number
                 // to an integer then display an error message.
                 if (issueNumber <= 0)
                 {
@@ -327,7 +329,7 @@ namespace ComicBookLibraryManager
         {
             DateTime publishedOnDate = DateTime.MinValue;
 
-            // While the published on date equals the minimum date/time value, 
+            // While the published on date equals the minimum date/time value,
             // prompt the user to provide a published on date.
             while (publishedOnDate == DateTime.MinValue)
             {
@@ -338,7 +340,7 @@ namespace ComicBookLibraryManager
                 // Attempt to parse the user's input to a date/time.
                 DateTime.TryParse(publishedOnDateInput, out publishedOnDate);
 
-                // If we weren't able to parse the provided published on date 
+                // If we weren't able to parse the provided published on date
                 // to a date/time then display an error message.
                 if (publishedOnDate == DateTime.MinValue)
                 {
@@ -358,8 +360,8 @@ namespace ComicBookLibraryManager
             decimal? averageRating = null;
             var promptUser = true;
 
-            // Continue to prompt the user for an average rating 
-            // until we get a valid value or an empty value (the 
+            // Continue to prompt the user for an average rating
+            // until we get a valid value or an empty value (the
             // average rating is not a required value).
             while (promptUser)
             {
@@ -376,22 +378,22 @@ namespace ComicBookLibraryManager
                     {
                         averageRating = averageRatingValue;
 
-                        // If we were able to parse the provided average rating 
-                        // then set the prompt user flag to "false" so we 
+                        // If we were able to parse the provided average rating
+                        // then set the prompt user flag to "false" so we
                         // break out of the while loop.
                         promptUser = false;
                     }
                     else
                     {
-                        // If we weren't able to parse the provided average rating 
+                        // If we weren't able to parse the provided average rating
                         // to a decimal then display an error message.
                         ConsoleHelper.OutputLine("Sorry, but that wasn't a valid number.");
                     }
                 }
                 else
                 {
-                    // If we didn't get a value from the user 
-                    // then set the prompt user flag to "false" 
+                    // If we didn't get a value from the user
+                    // then set the prompt user flag to "false"
                     // so we break out of the while loop.
                     promptUser = false;
                 }
@@ -404,8 +406,8 @@ namespace ComicBookLibraryManager
         /// Retrieves the comic books from the database and lists
         /// them to the screen.
         /// </summary>
-        /// <returns>A collection of the comic book IDs in the same order 
-        /// as the comic books were listed to facilitate selecting a comic book 
+        /// <returns>A collection of the comic book IDs in the same order
+        /// as the comic books were listed to facilitate selecting a comic book
         /// by its line number.</returns>
         private static IList<int> ListComicBooks()
         {
@@ -437,7 +439,7 @@ namespace ComicBookLibraryManager
         {
             string command = CommandListComicBook;
 
-            // If the current command doesn't equal the "Cancel" command 
+            // If the current command doesn't equal the "Cancel" command
             // then evaluate and process the command.
             while (command != CommandCancel)
             {
@@ -446,6 +448,7 @@ namespace ComicBookLibraryManager
                     case CommandListComicBook:
                         ListComicBook(comicBookId);
                         break;
+
                     case CommandUpdateComicBook:
                         UpdateComicBook(comicBookId);
                         command = CommandListComicBook;
@@ -476,8 +479,8 @@ namespace ComicBookLibraryManager
         }
 
         /// <summary>
-        /// Confirms that the user wants to delete the comic book 
-        /// for the provided comic book ID and if so, deletes the 
+        /// Confirms that the user wants to delete the comic book
+        /// for the provided comic book ID and if so, deletes the
         /// comic book from the database.
         /// </summary>
         /// <param name="comicBookId">The comic book ID to delete.</param>
@@ -533,7 +536,7 @@ namespace ComicBookLibraryManager
         }
 
         /// <summary>
-        /// Lists the editable properties for the provided comic book ID 
+        /// Lists the editable properties for the provided comic book ID
         /// and prompts the user to select a property to edit.
         /// </summary>
         /// <param name="comicBookId">The comic book ID to update.</param>
@@ -543,7 +546,7 @@ namespace ComicBookLibraryManager
 
             string command = CommandListComicBookProperties;
 
-            // If the current command doesn't equal the "Cancel" command 
+            // If the current command doesn't equal the "Cancel" command
             // then evaluate and process the command.
             while (command != CommandCancel)
             {
@@ -552,6 +555,7 @@ namespace ComicBookLibraryManager
                     case CommandListComicBookProperties:
                         ListComicBookProperties(comicBook);
                         break;
+
                     case CommandSave:
                         Repository.UpdateComicBook(comicBook);
                         command = CommandCancel;
@@ -586,8 +590,8 @@ namespace ComicBookLibraryManager
         }
 
         /// <summary>
-        /// Attempts to parse the provided command as a line number 
-        /// and if successful, calls the appropriate user input method 
+        /// Attempts to parse the provided command as a line number
+        /// and if successful, calls the appropriate user input method
         /// for the selected comic book property.
         /// </summary>
         /// <param name="command">The line number command.</param>
@@ -608,7 +612,7 @@ namespace ComicBookLibraryManager
                 // Retrieve the property name for the provided line number.
                 string propertyName = EditableProperties[lineNumber - 1];
 
-                // Switch on the provided property name and call the 
+                // Switch on the provided property name and call the
                 // associated user input method for that property name.
                 switch (propertyName)
                 {
@@ -616,18 +620,23 @@ namespace ComicBookLibraryManager
                         comicBook.SeriesId = GetSeriesId();
                         comicBook.Series = Repository.GetSeries(comicBook.SeriesId);
                         break;
+
                     case "IssueNumber":
                         comicBook.IssueNumber = GetIssueNumber();
                         break;
+
                     case "Description":
                         comicBook.Description = GetDescription();
                         break;
+
                     case "PublishedOn":
                         comicBook.PublishedOn = GetPublishedOnDate();
                         break;
+
                     case "AverageRating":
                         comicBook.AverageRating = GetAverageRating();
                         break;
+
                     default:
                         break;
                 }
@@ -647,8 +656,8 @@ namespace ComicBookLibraryManager
             ConsoleHelper.ClearOutput();
             ConsoleHelper.OutputLine("UPDATE COMIC BOOK");
 
-            // NOTE: This list of comic book property values 
-            // needs to match the collection of editable properties 
+            // NOTE: This list of comic book property values
+            // needs to match the collection of editable properties
             // declared at the top of this file.
             ConsoleHelper.OutputBlankLine();
             ConsoleHelper.OutputLine("1) Series: {0}", comicBook.Series.Title);
