@@ -176,3 +176,8 @@ namespace ComicBookLibraryManagerWebApp.Controllers
         }
     }
 }
+
+/*
+ Notes:
+ The web.config file in the project root is for configuring the MVC application, but the web.config file in the views folder is specifically for the Razor view engine and shouldn't be touched.
+     */

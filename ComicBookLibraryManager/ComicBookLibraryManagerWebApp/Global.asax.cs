@@ -16,3 +16,9 @@ namespace ComicBookLibraryManagerWebApp
         }
     }
 }
+
+/*
+
+    Global.asax.cs gives us the Application_Start() method which is configured every time the application is run.
+    We can customize hwo the app is deployed on diff envirionements here.
+     */
