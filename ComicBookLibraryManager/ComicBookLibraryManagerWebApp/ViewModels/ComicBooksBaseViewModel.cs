@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace ComicBookLibraryManagerWebApp.ViewModels
 {
     /// <summary>
-    /// Base view model class for the "Add Comic Book" 
+    /// Base view model class for the "Add Comic Book"
     /// and "Edit Comic Book" views.
     /// </summary>
     public abstract class ComicBooksBaseViewModel
@@ -21,10 +21,10 @@ namespace ComicBookLibraryManagerWebApp.ViewModels
         /// <summary>
         /// Initializes the view model.
         /// </summary>
-        public virtual void Init()
+        public virtual void Init(Context context)
         {
             SeriesSelectListItems = new SelectList(
-                new List<Series>(), // TODO Get the series list.
+                context.Series.OrderBy(s => s.Title).ToList(),
                 "Id", "Title");
         }
     }
