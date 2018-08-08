@@ -185,10 +185,33 @@ namespace ComicBookLibraryManagerWebApp.Controllers
             //    }
             //}
         }
+
+        private bool _disposed = false; //in order to guard against the case of if the Dispose method is called more than once, let's define a private field to trqack if the Dispose method has already been called.
+
+        protected override void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _context.Dispose();
+            }
+
+            _disposed = true;
+
+            base.Dispose(disposing);
+        }
     }
 }
 
 /*
  Notes:
  The web.config file in the project root is for configuring the MVC application, but the web.config file in the views folder is specifically for the Razor view engine and shouldn't be touched.
+
+    when we use our Context to persist or retrieve data from the database, EF will open a connection to the database, which is an unmanaged resource (meaning it doesn't auto-delete when it goes out of scope). By calling our context's Dispose() method (which is inherited from teh DBContext base class), we're letting EF know that the database connection can be closed.
+    -Previously we placed the connection in a using statement in order to ensure that the context isDispose method was called. Now that we're instantiating the context within a controller's constructor, we can't use that approach. Luckily we can explicitly dispose of the context.
+
      */
