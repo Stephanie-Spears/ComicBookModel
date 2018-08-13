@@ -6,7 +6,7 @@ using ComicBookShared.Data;
 
 namespace ComicBookLibraryManagerWebApp.Controllers
 {
-    /// <summary>
+    /// <summary>m
     /// Controller for adding/deleting comic book artists.
     /// </summary>
     public class ComicBookArtistsController : BaseController
@@ -14,10 +14,13 @@ namespace ComicBookLibraryManagerWebApp.Controllers
         private readonly ComicBooksRepository _comicBooksRepository;
         private readonly ComicBookArtistsRepository _comicBookArtistsRepository;
 
+        private readonly ArtistsRepository _artistsRepository;
+
         public ComicBookArtistsController()
         {
             _comicBooksRepository = new ComicBooksRepository(Context);
             _comicBookArtistsRepository = new ComicBookArtistsRepository(Context);
+            _artistsRepository = new ArtistsRepository(Context);
         }
 
         public ActionResult Add(int comicBookId)
@@ -34,7 +37,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
                 ComicBook = comicBook
             };
 
-            viewModel.Init(Repository);
+            viewModel.Init(Repository, _artistsRepository);
 
             return View(viewModel);
         }
@@ -60,7 +63,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
             }
 
             viewModel.ComicBook = _comicBooksRepository.Get(viewModel.ComicBookId);
-            viewModel.Init(Repository);
+            viewModel.Init(Repository, _artistsRepository);
 
             return View(viewModel);
         }

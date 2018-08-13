@@ -38,3 +38,12 @@ namespace ComicBookLibraryManagerWebApp.Controllers
         }
     }
 }
+
+/* NOTES
+ *
+ * You can constrain a generic type parameter by using the "where" keyword. The `where` keyword is a "contextual keyword", which are used to provide specific meaning in code, but are not reserved words in C#.
+ *
+ * A generic type parameter—without any constraints—can be any type, either a custom type or any of the built-in .NET types.
+ *
+ * Calling the `ToList` LINQ operator forces execution of the query. If you don't force execution of the query, then the query won't be executed until it's enumerated. This is known as "deferred execution".
+ */
