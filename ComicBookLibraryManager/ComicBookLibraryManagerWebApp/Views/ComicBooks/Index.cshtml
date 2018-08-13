@@ -1,19 +1,14 @@
-﻿@model List<ComicBookShared.Models.ComicBook>
-
+﻿@model IList<ComicBookShared.Models.ComicBook>
 @{
     ViewBag.Title = "Comic Books";
 }
-
 @Html.Partial("_Message")
-
 <h2>@ViewBag.Title</h2>
-
 <div class="pull-right">
     <a href="@Url.Action("Add")" class="btn btn-primary btn-lg">
         <span class="glyphicon glyphicon-plus"></span> Add Comic Book
     </a>
 </div>
-
 <table class="table table-striped">
     <thead>
         <tr>
