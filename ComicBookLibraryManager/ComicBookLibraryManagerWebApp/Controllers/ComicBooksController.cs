@@ -207,3 +207,15 @@ namespace ComicBookLibraryManagerWebApp.Controllers
  *
  * The dispose pattern is a commonly misunderstood design pattern that is, unfortunately, often implemented incorrectly.
  */
+
+/*
+ * Utilizing a custom base controller class gives you a way to share code across your application's controllers.  Having a custom base controller class can help you to adhere to the DRY (don't repeat yourself) design principle.
+ *
+ * A long-living database context can—over time—have a negative impact on the performance of your application. We don't want to instantiate a context every time we need to retrieve or persist data, but we also don't want a context that lives for too long.
+ *
+ * Utilizing class library projects is a common approach for sharing code across two or more projects. While class library projects provide functionality that other projects can consume, they can't be directly ran or executed.
+ *
+ * Query and command classes should be created for queries and commands that are relatively complex or used in more than one location. Query and command classes can be used as an alternative to repositories.
+ *
+ * A "logical" delete leaves the record in the database but flags it as "inactive" by setting a special property or column value. This is typically done by setting an "Active" property or column to a value of "false".
+ */
