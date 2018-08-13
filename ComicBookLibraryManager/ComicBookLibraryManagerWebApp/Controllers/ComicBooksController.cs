@@ -13,7 +13,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
     /// </summary>
     public class ComicBooksController : Controller
     {
-        private Context _context = null;
+        private readonly Context _context; //default is null
 
         public ComicBooksController()
         {
@@ -22,7 +22,6 @@ namespace ComicBookLibraryManagerWebApp.Controllers
 
         public ActionResult Index()
         {
-            // TODO Get the comic books list.
             // Include the "Series" navigation property.
             var comicBooks = _context.ComicBooks
                 .Include(cb => cb.Series)
@@ -162,7 +161,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            var comicBook = new ComicBook() {Id = id};
+            var comicBook = new ComicBook() { Id = id };
             _context.Entry(comicBook).State = EntityState.Deleted;
             _context.SaveChanges();
 
@@ -194,7 +193,7 @@ namespace ComicBookLibraryManagerWebApp.Controllers
             }
         }
 
-        private bool _disposed = false; //in order to guard against the case of if the Dispose method is called more than once, let's define a private field to track if the Dispose method has already been called.
+        private bool _disposed; //in order to guard against the case of if the Dispose method is called more than once, let's define a private field to track if the Dispose method has already been called. Boolean default value is false.
 
         protected override void Dispose(bool disposing)
         {
