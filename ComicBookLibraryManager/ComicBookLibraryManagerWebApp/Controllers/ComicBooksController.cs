@@ -222,3 +222,12 @@ namespace ComicBookLibraryManagerWebApp.Controllers
     -Previously we placed the connection in a using statement in order to ensure that the context isDispose method was called. Now that we're instantiating the context within a controller's constructor, we can't use that approach. Luckily we can explicitly dispose of the context.
 
      */
+
+/*
+ * PROJECT REVIEW
+ * Added the Database connection string in order to configure the server and database that EF should use
+ * Configured the database initializer using our app's config file, which prevented us from making an unnecessary number of calls to the database set initializer method
+ * Managed the database context's lifetime by aligning it with the controller's lifetime
+ * Implemented the necessary Reads, Creates, Updates, and Deletes (CRUD) for comic books.
+ *
+ */
