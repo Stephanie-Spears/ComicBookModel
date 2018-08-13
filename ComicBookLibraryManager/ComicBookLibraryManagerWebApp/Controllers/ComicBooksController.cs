@@ -231,3 +231,15 @@ namespace ComicBookLibraryManagerWebApp.Controllers
  * Implemented the necessary Reads, Creates, Updates, and Deletes (CRUD) for comic books.
  *
  */
+
+/*
+ * The IDisposable interface provides a mechanism for releasing unmanaged resources, through its single Dispose() method. The Entity Framework DbContext class implements the IDisposable interface.
+ *
+ * The Database `SetInitializer` method should NOT be called every time that the database context class is instantiated. The Database `SetInitializer` method only needs to be called once per application start—before the first use of the context.
+ *
+ * Unmanaged resources are resources that are not managed by the .NET runtime and therefore need to be manually released or cleaned up.
+ *
+ * Adding a database connection string to your app's configuration file with a name that matches your database context class name will cause Entity Framework to implicitly use it when attempting to connect to the database. Both the server and database name can be configured via the database connection string.
+ *
+ * The dispose pattern is a commonly misunderstood design pattern that is, unfortunately, often implemented incorrectly.
+ */
